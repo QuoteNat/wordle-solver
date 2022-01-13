@@ -1,36 +1,39 @@
 ## TODO: Convert this into a function that returns
 
-# Dictionary of letters and the amount of occurences for each in the database
-letters = {}
+def getFrequency():
+    # Dictionary of letters and the amount of occurences for each in the database
+    letters = {}
 
-database = open("../database/filtered.txt", "r")
+    database = open("../database/filtered.txt", "r")
 
-# total number of letters in every word
-totalLetters = 0
+    # total number of letters in every word
+    totalLetters = 0
 
-for word in database:
-    # get rid of \n and EOF
-    word = word.strip()
-    # tally up the amount of letters
-    for letter in word:
-        if letter not in letters:
-            letters[letter] = 1
-        else:
-            letters[letter] += 1
-        
-        totalLetters += 1
+    for word in database:
+        # get rid of \n and EOF
+        word = word.strip()
+        # tally up the amount of letters
+        for letter in word:
+            if letter not in letters:
+                letters[letter] = 1
+            else:
+                letters[letter] += 1
+            
+            totalLetters += 1
 
-# close datafile
-database.close()
+    # close datafile
+    database.close()
+
+    return letters
 
 # print the percentage of each letter
-print("Total number of letters is: " + str(totalLetters))
+# print("Total number of letters is: " + str(totalLetters))
 # sort the list from highest to lowest
 # https://www.tutorialsteacher.com/articles/sort-dict-by-value-in-python
-sortedLetters = sorted(letters.items(), key=lambda x:x[1], reverse=True)
+# sortedLetters = sorted(letters.items(), key=lambda x:x[1], reverse=True)
 
-for item in sortedLetters:
-    print(item[0] + ": {:.2f}%".format(item[1] / totalLetters * 100))
+# for item in sortedLetters:
+#     print(item[0] + ": {:.2f}%".format(item[1] / totalLetters * 100))
 
 # Total number of letters is: 33780
 # E: 10.34%
