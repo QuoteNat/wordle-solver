@@ -3,6 +3,9 @@ letters = {}
 
 database = open("../database/filtered.txt", "r")
 
+# total number of letters in every word
+totalLetters = 0
+
 for word in database:
     # get rid of \n and EOF
     word = word.strip()
@@ -12,8 +15,15 @@ for word in database:
             letters[letter] = 1
         else:
             letters[letter] += 1
+        
+        totalLetters += 1
 
 # close datafile
 database.close()
 
-print(letters)
+# print the percentage of each letter
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+print("Total number of letters is: " + str(totalLetters))
+
+for char in alphabet:
+    print(char + ": " + str(letters[char] / totalLetters * 100) + "%")
