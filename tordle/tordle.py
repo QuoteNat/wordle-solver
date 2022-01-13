@@ -1,13 +1,18 @@
 import random
+from enum import Enum
 
-
-class tordleGame():
+class TordleGame():
     # The correct word
     _word = None
     # History of guesses
     _guesses = []
     # Determines if the game is running
     _gameRunning = True
+    
+    class gameState(Enum):
+        WON = 1
+        LOST = 2
+        INCORRECT = 3
 
     def __init__(self):
         # create array of words
@@ -31,8 +36,8 @@ class tordleGame():
         isCorrect = True
 
         for i in range(5):
-            if guess[i] != "C":
-                isCorrect == False
+            if responseString[i] != "C":
+                isCorrect = False
         self._guesses.append(responseString)
 
         return isCorrect
@@ -43,9 +48,12 @@ class tordleGame():
     def getCorrect(self):
         return self._word
     
+    def isRunning(self):
+        return self._gameRunning
+    
     """Main gameloop. 
     
-    Takes a guess and returns "Won" if the answer is correct. Response key:
+    Takes a guess and returns "WON" if the answer is correct. Response key:
     C = letter is in the correct position
     I = letter is not in the correct position but is in the word
     N = letter is not in the word
@@ -53,16 +61,16 @@ class tordleGame():
     Returns a response string if the answer is incorrect.
     Returns an error string if the answer is not valid or the game is complete.
     """
-    # def doGuess(self, guess):
-    #     guess = guess.upper()
-    #     if len(guess) > 5:
-    #         return "Guess must be less than 5 characters"
-    #     elif len(self._guesses) == 6:
-    #         return "Can't make more than 6 guesses"
-    #     else:
+    def runGuess(self, guess):
+        guess = guess.upper()
+
+        result = self.checkGuess(guess)
+        if result == True:
+            self._gameRunning = False
+            return self.gameState.WON
+        elif result == False and len(self._guesses) == 6:
+            self._gameRunning = False
+            return self.gameState.LOST
+        else:
+            return self.gameState.INCORRECT
             
-tordle = tordleGame()
-print(tordle.getCorrect())
-guess = input()
-tordle.checkGuess(guess)
-print(tordle.getGuesses())
