@@ -19,6 +19,7 @@ for word in database:
     word = word.strip()
     answerDict[word] = getRating(word)
 
+# https://www.tutorialsteacher.com/articles/sort-dict-by-value-in-python
 sortedScores = sorted(answerDict.items(), key=lambda x:x[1], reverse=True)
 
 overallRating = open("./overallRating.txt", "w")
