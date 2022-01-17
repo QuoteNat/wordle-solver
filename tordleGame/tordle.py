@@ -14,12 +14,12 @@ class TordleGame():
         LOST = 2
         INCORRECT = 3
 
-    def __init__(self):
+    def __init__(self, wordList):
         # create array of words
         words = []
-        wordDatabase = open("../database/filtered.txt", "r")
-        wordList = wordDatabase.readlines()
-        wordDatabase.close()
+        # wordDatabase = open("./../database/filtered.txt", "r")
+        # wordList = wordDatabase.readlines()
+        # wordDatabase.close()
         self._word = wordList[random.randint(0, len(wordList)-1)].strip()
     
     def checkGuess(self, guess):
