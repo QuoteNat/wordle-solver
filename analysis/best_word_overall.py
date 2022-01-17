@@ -23,4 +23,4 @@ sortedScores = sorted(answerDict.items(), key=lambda x:x[1], reverse=True)
 
 overallRating = open("./overallRating.txt", "w")
 for score in sortedScores:
-    overallRating.writelines(score[0] + ": " + str(score[1]) + "\n")
+    overallRating.writelines(score[0] + "\n")
