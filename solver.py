@@ -1,21 +1,26 @@
 class Solver:
-    # List of words to work from. Ideally ranked.
-    _wordList = []
-    # Current guess in the wordList.
-    _counter = 0
-    # Columns where the correct letter is known. If the correct letter is unknown
-    # the array holds 0.
-    _correctColumns = [0, 0, 0, 0, 0]
-    # Incorrect letters for each column. Used for where include letters are not
-    _incorrectColumns = ["", "", "", "", ""]
-    # Letters that are in the word.
-    _includedLetters = []
-    # Letters that are not in the word.
-    _incorrectLetters = []
-
     def __init__(self, wordList):
+        # List of words to work from. Ideally ranked.
         self._wordList = wordList
+        # Current guess in the wordList.
+        self._counter = 0
+        # Columns where the correct letter is known. If the correct letter is unknown
+        # the array holds 0.
+        self._correctColumns = [0, 0, 0, 0, 0]
+        # Incorrect letters for each column. Used for where include letters are not
+        self._incorrectColumns = ["", "", "", "", ""]
+        # Letters that are in the word.
+        self._includedLetters = []
+        # Letters that are not in the word.
+        self._incorrectLetters = []
     
+    # def __del__(self):
+    #     self._wordList.clear()
+    #     self._correctColumns.clear()
+    #     self._incorrectColumns.clear()
+    #     self._includedLetters.clear()
+    #     self._incorrectLetters.clear()
+    #     self._counter = 0
     # def _printDebug(self):
     #     print(self._correctColumns)
     #     print(self._includedLetters)
@@ -31,8 +36,9 @@ class Solver:
         nextGuessFound = False
 
         # Iterate through each word in the word list until the next valid guess is found.
-        while not nextGuessFound and self._counter < len(self._wordList):
+        while (not nextGuessFound) and self._counter < (len(self._wordList)-2):
             self._counter += 1
+            
             nextGuess = self._wordList[self._counter]
             guessCounter = 0
             notIncorrect = True

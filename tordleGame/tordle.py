@@ -2,12 +2,6 @@ import random
 from enum import Enum
 
 class TordleGame():
-    # The correct word
-    _word = None
-    # History of guesses
-    _guesses = []
-    # Determines if the game is running
-    _gameRunning = True
     
     class gameState(Enum):
         WON = 1
@@ -15,13 +9,15 @@ class TordleGame():
         INCORRECT = 3
 
     def __init__(self, wordList):
-        # create array of words
-        words = []
-        # wordDatabase = open("./../database/filtered.txt", "r")
-        # wordList = wordDatabase.readlines()
-        # wordDatabase.close()
+        # History of guesses
+        self._guesses = []
+        # Determines if the game is running
+        self._gameRunning = True
         self._word = wordList[random.randint(0, len(wordList)-1)].strip()
     
+    def __del__(self):
+        self._guesses.clear()
+
     def checkGuess(self, guess):
         responseString = ""
         guess = guess.upper()
@@ -73,4 +69,5 @@ class TordleGame():
             return self.gameState.LOST
         else:
             return self.gameState.INCORRECT
+
             

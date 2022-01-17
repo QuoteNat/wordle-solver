@@ -20,3 +20,4 @@ while responseString != "CCCCC":
 
     if responseString != "CCCCC":
         solver.inputResult(responseString)
+
