@@ -21,12 +21,11 @@ class Solver:
     #     self._includedLetters.clear()
     #     self._incorrectLetters.clear()
     #     self._counter = 0
-    # def _printDebug(self):
-    #     print(self._correctColumns)
-    #     print(self._includedLetters)
-    #     print(self._incorrectColumns)
-    #     print(self._includedLetters)
-    #     print(self._incorrectLetters)
+    def _printDebug(self):
+        print("Correct Columns: " + str(self._correctColumns))
+        print("Incorrect Columns: " + str(self._incorrectColumns))
+        print("Included letters: " + str(self._includedLetters))
+        print("Incorrect Letters: " + str(self._incorrectLetters))
 
     '''Returns the solvers current guess as a string'''
     def getCurrentGuess(self):
@@ -50,7 +49,7 @@ class Solver:
                 if char in includedLetters:
                     includedLetters.remove(char)
             
-            if includedLetters != []:
+            if len(includedLetters) != 0:
                 notIncorrect = False
 
             # check every property of the guess that involves iterating each character
@@ -90,19 +89,18 @@ class Solver:
                     # Add the letter to the includeLetters list
                     # NOTE: Not sure if necessary for words with 2 of the same letter.
                     self._includedLetters.append(self._wordList[self._counter][i])
-                    # self._printDebug()
 
                 case "I":
                     # Add the letter to the includeLetters list
                     self._includedLetters.append(self._wordList[self._counter][i])
                     # Add the letter to its respective incorrect column.
                     self._incorrectColumns[i] += self._wordList[self._counter][i]
-                    # self._printDebug()
                 
                 case "N":
                     # Add the letter to the incorrect letters list
                     self._incorrectLetters.append(self._wordList[self._counter][i])
-                    # self._printDebug()
+
+        self._printDebug()
         
         # Get next guess
         self._getNextGuess()
