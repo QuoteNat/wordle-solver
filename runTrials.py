@@ -10,7 +10,7 @@ numGuesses = []
 failures = 0
 
 # import wordlist
-wordListFile = open("./analysis/overallRating.txt", "r")
+wordListFile = open("./analysis/columnRating.txt", "r")
 
 wordList = wordListFile.readlines()
 trials = len(wordList)

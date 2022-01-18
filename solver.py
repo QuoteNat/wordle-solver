@@ -42,7 +42,7 @@ class Solver:
             guessCounter = 0
             notIncorrect = True
 
-            includedLetters = self._includedLetters
+            includedLetters = self._includedLetters.copy()
 
             # check if the word has all the included letters
             for char in nextGuess:

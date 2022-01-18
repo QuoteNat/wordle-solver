@@ -1,7 +1,7 @@
 from solver import Solver
 
 # import wordlist
-wordListFile = open("./analysis/overallRating.txt", "r")
+wordListFile = open("./analysis/columnRating.txt", "r")
 
 wordList = wordListFile.readlines()
 
