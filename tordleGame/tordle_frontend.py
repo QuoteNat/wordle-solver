@@ -1,6 +1,15 @@
 from tordle import TordleGame
 
-game = TordleGame()
+# import wordlist
+wordListFile = open("../analysis/overallRating.txt", "r")
+
+wordList = wordListFile.readlines()
+
+# filter extraeneous "\n"s
+for i in range(len(wordList)):
+    wordList[i] = wordList[i].strip()
+
+game = TordleGame(wordList)
 print("Welcome to Tordle!")
 
 while game.isRunning():
