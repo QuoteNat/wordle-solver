@@ -100,7 +100,7 @@ class Solver:
                     # Add the letter to the incorrect letters list
                     self._incorrectLetters.append(self._wordList[self._counter][i])
 
-        self._printDebug()
+        # self._printDebug()
         
         # Get next guess
         self._getNextGuess()
