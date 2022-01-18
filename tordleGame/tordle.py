@@ -8,12 +8,15 @@ class TordleGame():
         LOST = 2
         INCORRECT = 3
 
-    def __init__(self, wordList):
+    def __init__(self, wordList, word=""):
         # History of guesses
         self._guesses = []
         # Determines if the game is running
         self._gameRunning = True
-        self._word = wordList[random.randint(0, len(wordList)-1)].strip()
+        if word != "" and len(word) == 5:
+            self._word = word
+        else:
+            self._word = wordList[random.randint(0, len(wordList)-1)].strip()
     
     def __del__(self):
         self._guesses.clear()
