@@ -10,7 +10,17 @@ numGuesses = []
 failures = 0
 
 # import wordlist
+print("What algorithm would you like to test? 1: Overall rating 2: Column rating")
+listInput = input()
 wordListFile = open("./analysis/overallRating.txt", "r")
+
+match int(listInput):
+    case 1:
+        wordListFile.close()
+        wordListFile = open("./analysis/overallRating.txt", "r")
+    case 2:
+        wordListFile.close()
+        wordListFile = open("./analysis/columnRating.txt", "r")
 
 wordList = wordListFile.readlines()
 trials = len(wordList)
@@ -54,4 +64,4 @@ print("Attempted to guess " + str(trials) + " words.")
 print("Got " + str(trials-failures) + " words correct.")
 print("Average guesses: " + str(averageGuesses))
 print("Failures: " + str(failures))
-print("Failed words: " + str(failedWords))
+#print("Failed words: " + str(failedWords))
