@@ -42,7 +42,7 @@ class Solver:
             guessCounter = 0
             notIncorrect = True
 
-            includedLetters = self._includedLetters
+            includedLetters = self._includedLetters.copy()
 
             # check if the word has all the included letters
             for char in nextGuess:
@@ -50,7 +50,7 @@ class Solver:
                     includedLetters.remove(char)
             
             if len(includedLetters) != 0:
-                print(includedLetters)
+                #print(nextGuess + str(includedLetters))
                 notIncorrect = False
 
             # check every property of the guess that involves iterating each character
@@ -89,11 +89,14 @@ class Solver:
                     self._correctColumns[i] = self._wordList[self._counter][i]
                     # Add the letter to the includeLetters list
                     # NOTE: Not sure if necessary for words with 2 of the same letter.
-                    self._includedLetters.append(self._wordList[self._counter][i])
+                    if self._wordList[self._counter][i] not in self._includedLetters:
+                        self._includedLetters.append(self._wordList[self._counter][i])
 
                 case "I":
                     # Add the letter to the includeLetters list
-                    self._includedLetters.append(self._wordList[self._counter][i])
+                    if self._wordList[self._counter][i] not in self._includedLetters:
+                        self._includedLetters.append(self._wordList[self._counter][i])                    
+                    
                     # Add the letter to its respective incorrect column.
                     self._incorrectColumns[i] += self._wordList[self._counter][i]
                 
