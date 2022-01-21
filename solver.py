@@ -42,7 +42,7 @@ class Solver:
             guessCounter = 0
             notIncorrect = True
 
-            includedLetters = self._includedLetters.copy()
+            includedLetters = self._includedLetters
 
             # check if the word has all the included letters
             for char in nextGuess:
@@ -50,6 +50,7 @@ class Solver:
                     includedLetters.remove(char)
             
             if len(includedLetters) != 0:
+                print(includedLetters)
                 notIncorrect = False
 
             # check every property of the guess that involves iterating each character
