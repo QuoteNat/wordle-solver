@@ -15,6 +15,9 @@ class ScattershotSolver:
         self._incorrectLetters = []
         # Guess counter
         self._guessCounter = 0
+        # Confidence counter
+        self._confidence = 0
+        self._confidenceThreshold = 2
         # List of guesses to expose letters
         self._guessList = ['AROSE', 'INTEL', 'CUBED', 'PEGGY', 'WHIFF']
     
@@ -26,7 +29,7 @@ class ScattershotSolver:
 
     '''Returns the solvers current guess as a string'''
     def getCurrentGuess(self):
-        if self._guessCounter < len(self._guessList):
+        if self._guessCounter < len(self._guessList) and self._confidence < self._confidenceThreshold:
             return self._guessList[self._guessCounter]
         else:
             return self._wordList[self._counter]
@@ -35,8 +38,7 @@ class ScattershotSolver:
         nextGuessFound = False
 
         # if still exposing letters, do nothing
-        if self._guessCounter == len(self._guessList):
-            self._printDebug()
+        if self._guessCounter == len(self._guessList) or self._confidence >= self._confidenceThreshold:
             # Iterate through each word in the word list until the next valid guess is found.
             while (not nextGuessFound) and self._counter < (len(self._wordList)-2):
                 self._counter += 1
@@ -84,25 +86,28 @@ class ScattershotSolver:
     param: resultString A string in CIN format, where C is a letter in the correct column,
     I is an included letter, and N is not in the correct word.'''
     def inputResult(self, resultString):
-        if self._guessCounter < len(self._guessList):
+        if self._guessCounter < len(self._guessList) and self._confidence < self._confidenceThreshold:
             curWord = self._guessList[self._guessCounter]
         else:
             curWord = self._wordList[self._counter]
+
         # iterate through the result string and update member variables to reflect it.
-        print(curWord)
         for i in range(len(resultString)):
             match resultString[i]:
                 case "C":
                     # update correctColumns to include the correct letter
                     self._correctColumns[i] = curWord[i]
+                    # update confidence by 2
+                    self._confidence += 2
                     # Add the letter to the includeLetters list
                     # NOTE: Not sure if necessary for words with 2 of the same letter.
                     if self._wordList[self._counter][i] not in self._includedLetters:
                         self._includedLetters.append(curWord[i])
 
                 case "I":
-                    # Add the letter to the includeLetters list
+                    # Add the letter to the includeLetters list and increaes confidence by 1
                     if self._wordList[self._counter][i] not in self._includedLetters:
+                        self._confidence += 1
                         self._includedLetters.append(curWord[i])                    
                     
                     # Add the letter to its respective incorrect column.
