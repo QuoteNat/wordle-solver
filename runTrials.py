@@ -1,4 +1,5 @@
-import solver
+from solver import Solver
+from scattershotSolver import ScattershotSolver
 import tordleGame.tordle
 
 trials = 0
@@ -10,17 +11,20 @@ numGuesses = []
 failures = 0
 
 # import wordlist
-print("What algorithm would you like to test? 1: Overall rating 2: Column rating")
-listInput = input()
+print("What algorithm would you like to test? 1: Overall rating 2: Column rating 3: Scattershot")
+listInput = int(input())
 wordListFile = open("./analysis/overallRating.txt", "r")
 
-match int(listInput):
+match listInput:
     case 1:
         wordListFile.close()
         wordListFile = open("./analysis/overallRating.txt", "r")
     case 2:
         wordListFile.close()
         wordListFile = open("./analysis/columnRating.txt", "r")
+    case 3:
+        wordListFile.close()
+        wordListFile = open("./analysis/overallRating.txt", "r")
 
 wordList = wordListFile.readlines()
 trials = len(wordList)
@@ -32,7 +36,10 @@ for i in range(len(wordList)):
 
 for i in range(trials):
     game = tordleGame.tordle.TordleGame(wordList, wordList[i])
-    solve = solver.Solver(wordList)
+    if listInput == 3:
+        solve = ScattershotSolver(wordList)
+    else:
+        solve = Solver(wordList)
 
     # to solve infinite loop problem
     # backupCounter = 0
